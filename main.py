@@ -1,10 +1,5 @@
-import pygame
+# O arquivo main vai apenas importar o outro arquivo, e Rodar ele aqui dentro
+from game import Game
 
-pygame.init()
-window = pygame.display.set_mode(size= (800, 600))
-
-while True:
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
+game = Game()
+game.run()
