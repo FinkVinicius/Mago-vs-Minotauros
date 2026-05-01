@@ -3,12 +3,18 @@ from const import ALTURA_WIN, LARGURA_WIN
 class Menu:
     def __init__(self, window):
         self.window = window
-        
-        # pega a imagem e redimensiona ela pra caber na tela
-        self.surf = pygame.transform.scale(pygame.image.load('./Assets/menu.png'), (LARGURA_WIN, ALTURA_WIN))
-        self.rect = self.surf.get_rect()
-               
+        #laço para carregar as imagens da animação do menu
+        self.frames = []
+        for i in range(1, 9):
+            self.frames.append(pygame.transform.scale(pygame.image.load(f'./Assets/frame{i}.png').convert_alpha(), (LARGURA_WIN, ALTURA_WIN)))
+        self.index_anim = 0
+       
     def run(self):
-        self.window.blit(source=self.surf, dest=self.rect)
+        # Roda a animação do menu
+        frame_atual = self.frames[int(self.index_anim)]
+        self.window.blit(frame_atual, (0, 0))
+        self.index_anim += 0.1 
+        if self.index_anim >= len(self.frames):
+            self.index_anim = 0
+
         pygame.display.flip()
-        pass
