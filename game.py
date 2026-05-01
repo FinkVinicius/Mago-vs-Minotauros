@@ -1,6 +1,7 @@
 
 import pygame
-from const import ALTURA_WIN, LARGURA_WIN
+from const import ALTURA_WIN, LARGURA_WIN, OPCOES_MENU
+from level import Level
 from menu import Menu
 class Game:
     def __init__(self):
@@ -9,12 +10,17 @@ class Game:
         self.clock = pygame.time.Clock()
 
     def run(self):
-        menu = Menu(self.window)
         while True:
-            self.clock.tick(60)
-            menu.run()
+            menu = Menu(self.window)
+            opcao = menu.run()
             
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
+            if opcao == 0: 
+                level = Level(self.window, 'lvl1', opcao)
+                level_return = level.run()
+            elif opcao == 1:  
+                pass  
+            elif opcao == 2: 
+                pass 
+            elif opcao == 3: 
+                pygame.quit()
+                quit()
