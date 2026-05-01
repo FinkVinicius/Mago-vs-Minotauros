@@ -23,14 +23,17 @@ class Menu:
             self.index_anim += 0.005 
             if self.index_anim >= len(self.frames):
                 self.index_anim = 0
+
             #Puxa o logo do menu para a tela, e centraliza ele coloca a 1 quarto da tela
             self.window.blit(self.surface_menu, (LARGURA_WIN/2 - self.surface_menu.get_width()/2, ALTURA_WIN/6 - self.surface_menu.get_height()/2 ))
+            
             #Chama o metodo para escrever o texto do menu e alinha ele no centro da tela, e coloca as opções do menu uma em baixo da outra
             for i in range(len(OPCOES_MENU)):    
                 self.menu_text(text_size= 35, text= OPCOES_MENU[i], color= COR_MENU, pos= (LARGURA_WIN/2, ALTURA_WIN/2 + 120 + i * 40))
+                      
             #atualiza a tela
             pygame.display.flip()
-
+            
             #Fecha o jogo quando clicar no X
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
