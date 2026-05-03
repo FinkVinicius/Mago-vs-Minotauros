@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import pygame
 
-from const import ALTURA_WIN, ENTITY_HEALTH, LARGURA_WIN
+from const import ENTITY_HEALTH
 
 
 class Entity(ABC):

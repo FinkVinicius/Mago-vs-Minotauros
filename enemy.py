@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 import pygame
 
-from const import ALTURA_WIN, ENEMY_SPEED, LARGURA_WIN, PLAYER_KEY_DOWN, PLAYER_KEY_LEFT, PLAYER_KEY_RIGHT, PLAYER_KEY_UP, PLAYERS_SPEED
+from const import ENTITY_SPEED
 from entity import Entity
 
 class Enemy(Entity):
@@ -26,9 +26,6 @@ class Enemy(Entity):
         self.speed = 0
         self.animation_timer = 0
         self.animation_speed = 6
-
-    def update(self):
-        pass
     
     def animation(self):
         # atualiza a imagem do enemy para a próxima frame da animação, e reseta o timer da animação
@@ -40,5 +37,5 @@ class Enemy(Entity):
 
     def move(self):
         # Move o enemy para a esquerda, e reseta a posição do enemy para a borda direita da tela quando ele sair da tela
-        self.rect.centerx -= ENEMY_SPEED[self.name]
+        self.rect.centerx -= ENTITY_SPEED[self.name]
         self.animation()

@@ -11,6 +11,28 @@ ALTURA_WIN = 720
 # opções do menu
 OPCOES_MENU = ('Single Player', 'Multiplayer', 'Instrucoes', 'Sair')
 
+
+#CONFIGURAÇÕES ENTIDADES
+DANO_ENTITY = {'player1shot': 20,
+               'player2shot': 20,
+               'inimigo1': 10,
+               'inimigo2': 15}
+ENTITY_SPEED = {'player1':  5,
+                'player2':  5,
+                'inimigo1':  3, 
+                'inimigo2':  5,
+                'player1shot':  10,
+                'player2shot':  10}
+ENTITY_HEALTH = {'player1':  100, 
+                 'player2':  100,
+                    'inimigo1':  30,
+                    'inimigo2':  50}
+TAMANHOS =  {'player1':  0.2, 
+               'player2':  0.2,
+               'inimigo1':  0.25, 
+               'inimigo2':  0.3}
+
+                    
 # configurações dos players
 PLAYERS_SPEED = 5
 PLAYER_KEY_UP = {'player1': pygame.K_UP, 
@@ -23,24 +45,16 @@ PLAYER_KEY_RIGHT = {'player1': pygame.K_RIGHT,
                     'player2': pygame.K_d}
 PLAYER_KEY_SHOOT = {'player1': pygame.K_RCTRL, 
                     'player2': pygame.K_LCTRL}
+
+
 #configurações dos inimigos
-ENEMY_SPEED = {'inimigo1':  3, 
-               'inimigo2':  5}
 EVENT_SPAWN_ENEMY = pygame.USEREVENT + 1
 TEMPO_SPAWN_ENEMY = {'lvl1':  5000, 
                      'lvl2':  1000}
 SPAWN_POOL = {'lvl1': ['inimigo1'],
               'lvl2': ['inimigo1', 'inimigo2']}
-ENTITY_HEALTH = {'player1':  100, 
-                 'player2':  100,
-                    'inimigo1':  30,
-                    'inimigo2':  50}
-                    
+
 
 #tamanhos dos sprites
-TAMANHOS =  {'player1':  0.2, 
-               'player2':  0.2,
-               'inimigo1':  0.25, 
-               'inimigo2':  0.3}
 
 

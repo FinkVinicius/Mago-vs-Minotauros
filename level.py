@@ -3,7 +3,8 @@ import random
 import pygame
 
 from const import EVENT_SPAWN_ENEMY, SPAWN_POOL, TEMPO_SPAWN_ENEMY
-import entity
+import player
+import entity 
 import entityfactory
 import entitymediator
 
@@ -34,7 +35,11 @@ class Level:
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
-
+                if isinstance(ent, player.Player): 
+                    shot = ent.shoot()
+                    if shot is not None:    
+                        self.entity_list.append(shot)
+                        
             self.level_text(text_size= 14, text= f"{self.name}", color= (255, 255, 255), pos= (100, 50))
             self.level_text(text_size= 14, text= "Pressione ESC para voltar ao menu", color= (255, 255, 255), pos= (100, 80))
             self.level_text(text_size= 14, text= f"Entidades na tela: {len(self.entity_list)}", color= (255, 255, 255), pos= (100, 110))

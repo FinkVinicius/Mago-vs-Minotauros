@@ -1,7 +1,9 @@
 
 
+from const import LARGURA_WIN
 import enemy
 from entity import Entity
+import playershot
 
 
 class EntityMediator:
@@ -10,7 +12,9 @@ class EntityMediator:
          if isinstance (ent, enemy.Enemy):
                 if ent.rect.right < 0:
                     ent.health = 0
-    
+         if isinstance (ent, playershot.PlayerShot):
+                if ent.rect.left > LARGURA_WIN:
+                    ent.health = 0 3
     @staticmethod
     def colision(entity_list: list [Entity]):
         for i in range(len(entity_list)):
