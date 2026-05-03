@@ -8,7 +8,6 @@ COR_SELECTED = (255, 255, 255)
 LARGURA_WIN = 1268
 ALTURA_WIN = 720
 
-
 # opções do menu
 OPCOES_MENU = ('Single Player', 'Multiplayer', 'Instrucoes', 'Sair')
 
@@ -33,7 +32,7 @@ TEMPO_SPAWN_ENEMY = {'lvl1':  5000,
 SPAWN_POOL = {'lvl1': ['inimigo1'],
               'lvl2': ['inimigo1', 'inimigo2']}
 
-#tamanhos dos sprites, não tem o valor do background porque ele é definido pela largura da janela
+#tamanhos dos sprites
 TAMANHOS =  {'player1':  0.2, 
                'player2':  0.2,
                'inimigo1':  0.25, 
