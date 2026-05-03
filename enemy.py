@@ -36,7 +36,6 @@ class Enemy(Entity):
                 self.animation_timer += 1
                 if self.animation_timer >= self.animation_speed:
                     self.animation_timer = 0
-                    # Só avança se não chegou no último frame de morte
                     if self.framesmorte_index < len(self.framesmorte) - 1:
                         self.framesmorte_index += 1
                         self.surf = self.framesmorte[self.framesmorte_index]
@@ -52,7 +51,7 @@ class Enemy(Entity):
     def move(self):
         self.animation()
         if self.is_dead:
-            return # Para de mover
+            return # Se o inimigo estiver morto, ele não se move
         
         self.rect.centerx -= ENTITY_SPEED[self.name]
         
