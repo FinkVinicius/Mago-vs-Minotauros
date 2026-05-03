@@ -27,7 +27,7 @@ class Enemy(Entity):
         self.animation_timer = 0
         self.animation_speed = 6
         self.framesmorte = []
-        for i in range(1, 3):
+        for i in range(1, 6):
             self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}morte{i}.png').convert_alpha(), (self.enemy_size, self.enemy_size)))
         self.framesmorte_index = 0
     
@@ -50,8 +50,9 @@ class Enemy(Entity):
                     self.frame_index = (self.frame_index + 1) % len(self.frames)
                     self.surf = self.frames[self.frame_index]
     def move(self):
+        self.animation()
         if self.is_dead:
             return # Para de mover
         
         self.rect.centerx -= ENTITY_SPEED[self.name]
-        self.animation()
+        

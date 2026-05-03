@@ -35,8 +35,7 @@ class EntityMediator:
 
                 if test_entity.rect.colliderect(ent.rect):
                     # Colisão: PlayerShot vs Enemy
-                    if (isinstance(test_entity, playershot.PlayerShot) and isinstance(ent, enemy.Enemy)) or \
-                    (isinstance(test_entity, enemy.Enemy) and isinstance(ent, playershot.PlayerShot)):
+                    if (isinstance(test_entity, playershot.PlayerShot) and isinstance(ent, enemy.Enemy)) or (isinstance(test_entity, enemy.Enemy) and isinstance(ent, playershot.PlayerShot)):
                         
                         if isinstance(test_entity, playershot.PlayerShot):
                             ent.health -= DANO_ENTITY[test_entity.name]
@@ -46,9 +45,8 @@ class EntityMediator:
                             test_entity.health -= DANO_ENTITY[ent.name]
                             ent.health = -900 # Tiro some direto
                             if test_entity.health <= 0: test_entity.is_dead = True
-                # --- ADICIONE ESTE BLOCO ABAIXO DO SEU IF DE TIRO ---
-                    elif (isinstance(test_entity, player.Player) and isinstance(ent, enemy.Enemy)) or \
-                        (isinstance(test_entity, enemy.Enemy) and isinstance(ent, player.Player)):
+               
+                    elif (isinstance(test_entity, player.Player) and isinstance(ent, enemy.Enemy)) or(isinstance(test_entity, enemy.Enemy) and isinstance(ent, player.Player)):
                         
                         # Descobre quem é o player e quem é o inimigo
                         p = test_entity if isinstance(test_entity, player.Player) else ent
