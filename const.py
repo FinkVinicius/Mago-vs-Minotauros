@@ -13,20 +13,20 @@ OPCOES_MENU = ('Single Player', 'Multiplayer', 'Instrucoes', 'Sair')
 
 
 #CONFIGURAÇÕES ENTIDADES
-DANO_ENTITY = {'player1shot': 20,
-               'player2shot': 20,
-               'inimigo1': 10,
-               'inimigo2': 15}
+DANO_ENTITY = {'player1shot': 1,
+               'player2shot': 1,
+               'inimigo1': 1,
+               'inimigo2': 1}
 ENTITY_SPEED = {'player1':  5,
                 'player2':  5,
                 'inimigo1':  3, 
                 'inimigo2':  5,
                 'player1shot':  10,
                 'player2shot':  10}
-ENTITY_HEALTH = {'player1':  100, 
-                 'player2':  100,
-                    'inimigo1':  30,
-                    'inimigo2':  50}
+ENTITY_HEALTH = {'player1':  1, 
+                 'player2':  1,
+                 'inimigo1':  1,
+                 'inimigo2':  1}
 TAMANHOS =  {'player1':  0.2, 
                'player2':  0.2,
                'inimigo1':  0.25, 

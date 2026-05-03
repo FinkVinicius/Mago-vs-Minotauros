@@ -39,7 +39,7 @@ class Level:
                     shot = ent.shoot()
                     if shot is not None:    
                         self.entity_list.append(shot)
-                        
+
             self.level_text(text_size= 14, text= f"{self.name}", color= (255, 255, 255), pos= (100, 50))
             self.level_text(text_size= 14, text= "Pressione ESC para voltar ao menu", color= (255, 255, 255), pos= (100, 80))
             self.level_text(text_size= 14, text= f"Entidades na tela: {len(self.entity_list)}", color= (255, 255, 255), pos= (100, 110))
@@ -49,6 +49,7 @@ class Level:
             # Verifica colisões entre as entidades importando a função de colisão do EntityMediator
             entitymediator.EntityMediator.colision(entity_list= self.entity_list)
             entitymediator.EntityMediator.verify_health(entity_list= self.entity_list)
+            self.entity_list = [ent for ent in self.entity_list if ent.health > -900]
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

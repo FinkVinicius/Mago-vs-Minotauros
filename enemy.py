@@ -10,7 +10,7 @@ class Enemy(Entity):
     def __init__(self, name: str, position: tuple, size: int):
         # Define o tamanho do enemy como 20% da altura da janela
         self.enemy_size = size
-        super().__init__(f"{name}run1", position, size=(self.enemy_size, self.enemy_size))
+        super().__init__(name, position, size=(size, size))
         self.name = name
         
         
@@ -26,16 +26,32 @@ class Enemy(Entity):
         self.speed = 0
         self.animation_timer = 0
         self.animation_speed = 6
+        self.framesmorte = []
+        for i in range(1, 3):
+            self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}morte{i}.png').convert_alpha(), (self.enemy_size, self.enemy_size)))
+        self.framesmorte_index = 0
     
     def animation(self):
-        # atualiza a imagem do enemy para a próxima frame da animação, e reseta o timer da animação
-        self.animation_timer += 1
-        if self.animation_timer >= self.animation_speed:
-            self.animation_timer = 0
-            self.frame_index = (self.frame_index + 1) % len(self.frames)
-            self.surf = self.frames[self.frame_index]
-
+            if self.is_dead:
+                self.animation_timer += 1
+                if self.animation_timer >= self.animation_speed:
+                    self.animation_timer = 0
+                    # Só avança se não chegou no último frame de morte
+                    if self.framesmorte_index < len(self.framesmorte) - 1:
+                        self.framesmorte_index += 1
+                        self.surf = self.framesmorte[self.framesmorte_index]
+                    else:
+                        self.health = -999 
+            
+            else:
+                self.animation_timer += 1
+                if self.animation_timer >= self.animation_speed:
+                    self.animation_timer = 0
+                    self.frame_index = (self.frame_index + 1) % len(self.frames)
+                    self.surf = self.frames[self.frame_index]
     def move(self):
-        # Move o enemy para a esquerda, e reseta a posição do enemy para a borda direita da tela quando ele sair da tela
+        if self.is_dead:
+            return # Para de mover
+        
         self.rect.centerx -= ENTITY_SPEED[self.name]
         self.animation()
