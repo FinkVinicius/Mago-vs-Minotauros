@@ -46,6 +46,8 @@ class Level:
                     pygame.quit()
                     quit()
                 # coloquei voltar pro menu quando aperta esc
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    return
                # No evento de spawn
                 if event.type == EVENT_SPAWN_ENEMY:
                     # Escolhe um nome da lista baseada no nível atual (ex: 'lvl1')
