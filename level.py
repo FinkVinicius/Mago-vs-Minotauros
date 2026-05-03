@@ -5,6 +5,7 @@ import pygame
 from const import EVENT_SPAWN_ENEMY, SPAWN_POOL, TEMPO_SPAWN_ENEMY
 import entity
 import entityfactory
+import entitymediator
 
 
 
@@ -40,7 +41,10 @@ class Level:
             self.level_text(text_size= 14, text= f"fps: {clock.get_fps():.2f}", color= (255, 255, 255), pos= (100, 170))
 
             pygame.display.update()
-            
+            # Verifica colisões entre as entidades importando a função de colisão do EntityMediator
+            entitymediator.EntityMediator.colision(entity_list= self.entity_list)
+            entitymediator.EntityMediator.verify_health(entity_list= self.entity_list)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()

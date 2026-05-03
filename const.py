@@ -31,6 +31,11 @@ TEMPO_SPAWN_ENEMY = {'lvl1':  5000,
                      'lvl2':  1000}
 SPAWN_POOL = {'lvl1': ['inimigo1'],
               'lvl2': ['inimigo1', 'inimigo2']}
+ENTITY_HEALTH = {'player1':  100, 
+                 'player2':  100,
+                    'inimigo1':  30,
+                    'inimigo2':  50}
+                    
 
 #tamanhos dos sprites
 TAMANHOS =  {'player1':  0.2, 

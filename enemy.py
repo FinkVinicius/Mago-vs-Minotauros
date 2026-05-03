@@ -41,7 +41,4 @@ class Enemy(Entity):
     def move(self):
         # Move o enemy para a esquerda, e reseta a posição do enemy para a borda direita da tela quando ele sair da tela
         self.rect.centerx -= ENEMY_SPEED[self.name]
-        if self.rect.right < 0:
-            self.rect.left = LARGURA_WIN
-                  
         self.animation()
