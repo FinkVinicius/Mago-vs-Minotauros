@@ -27,11 +27,16 @@ PLAYER_KEY_SHOOT = {'player1': pygame.K_RCTRL,
 #configurações dos inimigos
 ENEMY_SPEED = {'inimigo1':  3, 
                'inimigo2':  5}
-
 EVENT_SPAWN_ENEMY = pygame.USEREVENT + 1
 TEMPO_SPAWN_ENEMY = {'lvl1':  5000, 
                      'lvl2':  1000}
 SPAWN_POOL = {'lvl1': ['inimigo1'],
               'lvl2': ['inimigo1', 'inimigo2']}
+
+#tamanhos dos sprites, não tem o valor do background porque ele é definido pela largura da janela
+TAMANHOS =  {'player1':  0.2, 
+               'player2':  0.2,
+               'inimigo1':  0.25, 
+               'inimigo2':  0.3}
 
 

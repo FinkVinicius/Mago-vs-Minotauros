@@ -7,11 +7,12 @@ from entity import Entity
 
 class Enemy(Entity):
 
-    def __init__(self, name: str, position: tuple):
+    def __init__(self, name: str, position: tuple, size: int):
         # Define o tamanho do enemy como 20% da altura da janela
-        self.enemy_size = int(ALTURA_WIN * 0.20)
+        self.enemy_size = size
         super().__init__(f"{name}run1", position, size=(self.enemy_size, self.enemy_size))
         self.name = name
+        
         
         # Carrega as frames de animação do enemy
         self.frames = []

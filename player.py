@@ -5,9 +5,9 @@ from entity import Entity
 
 class Player(Entity):
 
-    def __init__(self, name: str, position: tuple):
+    def __init__(self, name: str, position: tuple, size: int):
         # Define o tamanho do player como 20% da altura da janela
-        self.player_size = int(ALTURA_WIN * 0.20)
+        self.player_size = size
         super().__init__(f"{name}run1", position, size=(self.player_size, self.player_size))
         self.name = name
         
