@@ -1,20 +1,18 @@
 import pygame   
-from const import LARGURA_WIN
 import entity
 
 class background(entity.Entity):   
 
     def __init__(self, name: str, position: tuple):
-        super().__init__(name, position)    
+        window_size = pygame.display.get_window_size()
+        super().__init__(name, position, size=window_size)    
         #No meu projeto resolvi usar mais de um background para criar um efeito de paralaxe, por isso o nome do background tem um numero no final, e a velocidade do background é definida por esse numero
         self.speed = int(name[-1])
-        pass 
 
-    def move(self,):
+    def move(self):
         self.rect.centerx -= self.speed
-
+        # Se o background sair completamente da tela, ele volta para a posição inicial, criando um loop infinito de background
         if self.rect.right <= 0:
-            self.rect.left = LARGURA_WIN
-        pass
-
+            # Reseta a posição do background para o lado direito da tela
+            self.rect.left = pygame.display.get_window_size()[0]
     

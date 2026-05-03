@@ -17,8 +17,9 @@ class Game:
             if opcao == 0: 
                 level = Level(self.window, 'lvl1', opcao)
                 level_return = level.run()
-            elif opcao == 1:  
-                pass  
+            elif opcao == 1:
+                level = Level(self.window, 'lvl1', opcao)
+                level_return = level.run()    
             elif opcao == 2: 
                 pass 
             elif opcao == 3: 

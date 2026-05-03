@@ -21,12 +21,14 @@ class Menu:
         pygame.mixer_music.load('./Assets/menu.mp3')
         pygame.mixer_music.play(-1) 
         opcao_selecionada = 0
-        
+        clock = pygame.time.Clock()
+
         while True:
+            clock.tick(60)
             # Roda a animação do menu
             frame_atual = self.frames[int(self.index_anim)]
             self.window.blit(frame_atual, (0, 0))
-            self.index_anim += 0.005 
+            self.index_anim += 0.1 
             if self.index_anim >= len(self.frames):
                 self.index_anim = 1
 
