@@ -26,28 +26,39 @@ class Enemy(Entity):
         self.speed = 0
         self.animation_timer = 0
         self.animation_speed = 6
+        # Carrega as frames de animação de morte do enemy
         self.framesmorte = []
         for i in range(1, 6):
             self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}morte{i}.png').convert_alpha(), (self.enemy_size, self.enemy_size)))
         self.framesmorte_index = 0
+        # Carrega as frames de animação de ataque do enemy
+        self.frames_colisao = []
+        for i in range(1, 5): # 2 frames: Assets/NameColisao1.png e Colisao2.png
+            img = pygame.image.load(f'./Assets/{name}atack{i}.png').convert_alpha()
+            self.frames_colisao.append(pygame.transform.scale(img, (self.enemy_size, self.enemy_size)))
+        self.is_colliding = False
+        self.frames_colisao_index = 0
     
     def animation(self):
-            if self.is_dead:
-                self.animation_timer += 1
-                if self.animation_timer >= self.animation_speed:
-                    self.animation_timer = 0
-                    if self.framesmorte_index < len(self.framesmorte) - 1:
-                        self.framesmorte_index += 1
-                        self.surf = self.framesmorte[self.framesmorte_index]
-                    else:
-                        self.health = -999 
+        self.animation_timer += 1
+        if self.animation_timer >= self.animation_speed:
+            self.animation_timer = 0
             
+            if self.is_dead:
+                if self.framesmorte_index < len(self.framesmorte) - 1:
+                    self.framesmorte_index += 1
+                    self.surf = self.framesmorte[self.framesmorte_index]
+                else:
+                    self.health = -999 
+
+            elif self.is_colliding:
+                self.frames_colisao_index = (self.frames_colisao_index + 1) % len(self.frames_colisao)
+                self.surf = self.frames_colisao[self.frames_colisao_index]
+                self.is_colliding = False 
+
             else:
-                self.animation_timer += 1
-                if self.animation_timer >= self.animation_speed:
-                    self.animation_timer = 0
-                    self.frame_index = (self.frame_index + 1) % len(self.frames)
-                    self.surf = self.frames[self.frame_index]
+                self.frame_index = (self.frame_index + 1) % len(self.frames)
+                self.surf = self.frames[self.frame_index]
     def move(self):
         self.animation()
         if self.is_dead:

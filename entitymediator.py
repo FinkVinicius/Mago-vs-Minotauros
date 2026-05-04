@@ -54,7 +54,7 @@ class EntityMediator:
                         
                         # Tira a vida do player
                         p.health -= DANO_ENTITY[inimigo.name]
-                        
+                        inimigo.is_colliding = True # Ativa animação de colisão no inimigo
                         if p.health <= 0:
                             p.is_dead = True
 

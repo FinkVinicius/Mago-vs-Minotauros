@@ -34,8 +34,8 @@ class Player(Entity):
         self.animation_timer = 0
         self.animation_speed = 6
         self.framesmorte = []
-        for i in range(1, 3):
-            self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}atack{i}.png').convert_alpha(), (self.player_size, self.player_size)))
+        for i in range(1, 5):
+            self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}morte{i}.png').convert_alpha(), (self.player_size, self.player_size)))
         self.framesmorte_index = 0
     def update(self):
         pass

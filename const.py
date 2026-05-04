@@ -19,13 +19,13 @@ DANO_ENTITY = {'player1shot': 1,
                'inimigo2': 1}
 ENTITY_SPEED = {'player1':  5,
                 'player2':  5,
-                'inimigo1':  3, 
+                'inimigo1':  7, 
                 'inimigo2':  5,
                 'player1shot':  10,
                 'player2shot':  10}
-ENTITY_HEALTH = {'player1':  1, 
+ENTITY_HEALTH = {'player1':  4, 
                  'player2':  1,
-                 'inimigo1':  1,
+                 'inimigo1':  2,
                  'inimigo2':  1}
 TAMANHOS =  {'player1':  0.2, 
                'player2':  0.2,
@@ -53,8 +53,4 @@ TEMPO_SPAWN_ENEMY = {'lvl1':  5000,
                      'lvl2':  1000}
 SPAWN_POOL = {'lvl1': ['inimigo1'],
               'lvl2': ['inimigo1', 'inimigo2']}
-
-
-#tamanhos dos sprites
-
 
