@@ -26,16 +26,11 @@ class PlayerShot(Entity):
         self.animation_speed = 6
          # Carrega as frames de animação de morte do enemy
         self.framesmorte = []
-        for i in range(1, 6):
-            self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}morte{i}.png').convert_alpha(), (self.enemy_size, self.enemy_size)))
+        for i in range(1, 5):
+            self.framesmorte.append(pygame.transform.scale(pygame.image.load(f'./Assets/{name}morte{i}.png').convert_alpha(), (size[0], size[1])))
         self.framesmorte_index = 0
-
-
-    def update(self):
-        pass
     
     def animation(self):
-        # atualiza a imagem do player para a próxima frame da animação, e reseta o timer da animação
         self.animation_timer += 1
         if self.animation_timer >= self.animation_speed:
             self.animation_timer = 0
@@ -47,16 +42,14 @@ class PlayerShot(Entity):
                 else:
                     self.health = -999 
 
-            elif self.is_colliding:
-                self.frames_colisao_index = (self.frames_colisao_index + 1) % len(self.frames_colisao)
-                self.surf = self.frames_colisao[self.frames_colisao_index]
-                self.is_colliding = False 
-
             else:
 
                 self.frame_index = (self.frame_index + 1) % len(self.frames)
                 self.surf = self.frames[self.frame_index]
 
     def move(self):
-        self.rect.centerx += ENTITY_SPEED[self.name]
         self.animation()
+        if self.is_dead:
+            return # Se o inimigo estiver morto, ele não se move
+        self.rect.centerx += ENTITY_SPEED[self.name]
+            

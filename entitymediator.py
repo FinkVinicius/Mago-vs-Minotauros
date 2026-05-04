@@ -1,5 +1,7 @@
 
 
+import pygame
+
 from const import DANO_ENTITY, LARGURA_WIN
 import enemy
 from entity import Entity
@@ -39,12 +41,12 @@ class EntityMediator:
                         
                         if isinstance(test_entity, playershot.PlayerShot):
                             ent.health -= DANO_ENTITY[test_entity.name]
-                            test_entity.health = -900 # Tiro some direto
+                            test_entity.is_dead = True # vai pra animação de morte do tiro
                             if ent.health <= 0: ent.is_dead = True # Ativa animação no inimigo
                         else:
                             test_entity.health -= DANO_ENTITY[ent.name]
-                            ent.health = -900 # Tiro some direto
-                            if test_entity.health <= 0: test_entity.is_dead = True
+                            ent.is_dead = True# vai pra animação de morte do tiro
+                            if test_entity.health <= 0: test_entity.is_dead = True #testa se o tiro matou o inimigo se sim ativa animação de morte
                
                     elif (isinstance(test_entity, player.Player) and isinstance(ent, enemy.Enemy)) or(isinstance(test_entity, enemy.Enemy) and isinstance(ent, player.Player)):
                         
@@ -52,11 +54,12 @@ class EntityMediator:
                         p = test_entity if isinstance(test_entity, player.Player) else ent
                         inimigo = ent if isinstance(test_entity, player.Player) else test_entity
                         
-                        # Tira a vida do player
-                        p.health -= DANO_ENTITY[inimigo.name]
-                        inimigo.is_colliding = True # Ativa animação de colisão no inimigo
-                        if p.health <= 0:
-                            p.is_dead = True
+                        # se a parte de cima do player colidir com a parte de cima do inimigo, o player leva dano
+                        if pygame.Rect(p.rect.left, p.rect.top, p.rect.width, p.rect.height // 2).colliderect(pygame.Rect(inimigo.rect.left, inimigo.rect.top, inimigo.rect.width, inimigo.rect.height // 2)):
+                            p.health -= DANO_ENTITY[inimigo.name]
+                            inimigo.is_colliding = True # Ativa animação de colisão no inimigo
+                            if p.health <= 0:
+                                p.is_dead = True
 
     @staticmethod        
 
