@@ -25,8 +25,8 @@ class Level:
         pygame.time.set_timer(EVENT_SPAWN_ENEMY, millis= TEMPO_SPAWN_ENEMY[self.name])
             
     def run(self):
-        #pygame.mixer_music.load(f'./Assets/{self.name}_music.mp3')
-        #pygame.mixer_music.play(-1)
+        pygame.mixer_music.load(f'./Assets/{self.name}_music.mp3')
+        pygame.mixer_music.play(-1)
         # Cria um relógio para controlar o frame rate do jogo
         clock = pygame.time.Clock()
 
@@ -56,7 +56,6 @@ class Level:
             # Verifica colisões entre as entidades importando a função de colisão do EntityMediator
             entitymediator.EntityMediator.colision(entity_list= self.entity_list)
             # verifica a vida, e elimina se ja passaram pelo loop da animação de morte
-            entitymediator.EntityMediator.verify_health(entity_list= self.entity_list)
             self.entity_list = [ent for ent in self.entity_list if ent.health > -900]
             # botao de fechar a janela
             for event in pygame.event.get():
@@ -66,7 +65,7 @@ class Level:
                 # coloquei voltar pro menu quando aperta esc
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     return
-               # evnto de spawn dos inimigos
+                # evnto de spawn dos inimigos
                 if event.type == EVENT_SPAWN_ENEMY:
                     # Escolhe um nome da lista baseada no nível atual
                     nome_inimigo = random.choice(SPAWN_POOL[self.name])

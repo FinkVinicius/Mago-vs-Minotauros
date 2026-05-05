@@ -19,18 +19,21 @@ DANO_ENTITY = {'player1shot': 1,
                'inimigo2': 1}
 ENTITY_SPEED = {'player1':  5,
                 'player2':  5,
-                'inimigo1':  7, 
+                'inimigo1':  10, 
                 'inimigo2':  5,
                 'player1shot':  10,
                 'player2shot':  10}
-ENTITY_HEALTH = {'player1':  4, 
-                 'player2':  1,
-                 'inimigo1':  2,
-                 'inimigo2':  1}
-TAMANHOS =  {'player1':  0.2, 
-               'player2':  0.2,
-               'inimigo1':  0.25, 
-               'inimigo2':  0.3}
+ENTITY_HEALTH = {'player1':  3, 
+                 'player2':  3,
+                 'inimigo1':  3,
+                 'inimigo2':  3}
+TAMANHOS =  {'player1':  (0.1, 0.2), 
+               'player2':  (0.1, 0.2),
+               'inimigo1':  (0.20, 0.30), 
+               'inimigo2':  (0.15, 0.3),
+               'player1shot':  (0.05, 0.04),
+               'player2shot':  (0.10, 0.04),
+                }
 
                     
 # configurações dos players

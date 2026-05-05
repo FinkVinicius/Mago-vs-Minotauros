@@ -12,6 +12,7 @@ import playershot
 class EntityMediator:
     @staticmethod
     def __verify_colision_window(ent: Entity):
+         # se o tiro ou inimigo sairem da tela apaga eles automaticamente
          if isinstance (ent, enemy.Enemy):
                 if ent.rect.right < 0:
                     ent.health = -900
@@ -24,46 +25,45 @@ class EntityMediator:
             test_entity = entity_list[i]
             EntityMediator.__verify_colision_window(test_entity)
             
-            # Pula verificações se a entidade já estiver morta
+            # Pula se estiver morta
             if test_entity.health <= 0:
                 continue
 
             for j in range(i + 1, len(entity_list)):
                 ent = entity_list[j]
                 
-                # Pula se a segunda entidade já estiver morta
                 if ent.health <= 0:
                     continue
 
                 if test_entity.rect.colliderect(ent.rect):
-                    # Colisão: PlayerShot vs Enemy
+                    # Colisãoplayshot e enemy
                     if (isinstance(test_entity, playershot.PlayerShot) and isinstance(ent, enemy.Enemy)) or (isinstance(test_entity, enemy.Enemy) and isinstance(ent, playershot.PlayerShot)):
-                        
-                        if isinstance(test_entity, playershot.PlayerShot):
-                            ent.health -= DANO_ENTITY[test_entity.name]
-                            test_entity.is_dead = True # vai pra animação de morte do tiro
-                            if ent.health <= 0: ent.is_dead = True # Ativa animação no inimigo
-                        else:
-                            test_entity.health -= DANO_ENTITY[ent.name]
-                            ent.is_dead = True# vai pra animação de morte do tiro
-                            if test_entity.health <= 0: test_entity.is_dead = True #testa se o tiro matou o inimigo se sim ativa animação de morte
-               
+                        shot = test_entity if isinstance(test_entity, playershot.PlayerShot) else ent
+                        inimigo = ent if isinstance(test_entity, playershot.PlayerShot) else test_entity
+                        #impede do tiro acertar duas vezes pq ativa o is_dead logo depois
+                        if not shot.is_dead:
+                            #diminui vida do inimigo
+                            inimigo.health -= DANO_ENTITY[shot.name] 
+                            # O tiro morre ao tocar fazendo a animação ativar e o tiro n repetir o dano
+                            shot.is_dead = True 
+                            # mmata o inimigo se a vida baixar de 0
+                            if inimigo.health <= 0: 
+                                inimigo.is_dead = True
+                    # colisão inimigo e player            
                     elif (isinstance(test_entity, player.Player) and isinstance(ent, enemy.Enemy)) or(isinstance(test_entity, enemy.Enemy) and isinstance(ent, player.Player)):
-                        
-                        # Descobre quem é o player e quem é o inimigo
                         p = test_entity if isinstance(test_entity, player.Player) else ent
                         inimigo = ent if isinstance(test_entity, player.Player) else test_entity
-                        
-                        # se a parte de cima do player colidir com a parte de cima do inimigo, o player leva dano
-                        if pygame.Rect(p.rect.left, p.rect.top, p.rect.width, p.rect.height // 2).colliderect(pygame.Rect(inimigo.rect.left, inimigo.rect.top, inimigo.rect.width, inimigo.rect.height // 2)):
-                            p.health -= DANO_ENTITY[inimigo.name]
-                            inimigo.is_colliding = True # Ativa animação de colisão no inimigo
-                            if p.health <= 0:
-                                p.is_dead = True
-
-    @staticmethod        
-
-    def verify_health(entity_list: list [Entity]):
-        for ent in entity_list:
-            if ent.health <= 0:
-               ent.is_dead = True
+                        # Verifica se o tempo atual permite um novo dano
+                        ticks_atuais = pygame.time.get_ticks()
+                        if ticks_atuais - p.last_hit_time > p.hit_cooldown:
+                             # O dano so acontece se pegar a parte de cima do inimigo no player
+                             if pygame.Rect(p.rect.left, p.rect.top, p.rect.width, p.rect.height // 2).colliderect(pygame.Rect(inimigo.rect.left, inimigo.rect.top, inimigo.rect.width, inimigo.rect.height // 2)):
+                                #diminuio a vida do player
+                                p.health -= DANO_ENTITY[inimigo.name]
+                                # Registra o momento do dano
+                                p.last_hit_time = ticks_atuais 
+                                # ativa a animação de ataque do inimigo
+                                inimigo.is_colliding = True
+                                # se a vida do player for menor que 0 mata ele
+                                if p.health <= 0:
+                                    p.is_dead = True

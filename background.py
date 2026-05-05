@@ -6,9 +6,8 @@ class Background(entity.Entity):
     def __init__(self, name: str, position: tuple):
         window_size = pygame.display.get_window_size()
         super().__init__(name, position, size=window_size)    
-        #No meu projeto resolvi usar mais de um background para criar um efeito de paralaxe, por isso o nome do background tem um numero no final, e a velocidade do background é definida por esse numero
+        #resolvi usar mais de um background a velocidade do background é definida pelo numero no nome dele
         window_size = pygame.display.get_window_size()
-        # Você pode até forçar a extensão .png ou .jpg aqui
         self.surf = pygame.image.load(f'./Assets/{name}.png').convert_alpha()
         self.surf = pygame.transform.scale(self.surf, window_size)
         self.rect = self.surf.get_rect(topleft=position)
