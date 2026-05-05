@@ -1,7 +1,7 @@
 import pygame   
 import entity
 
-class background(entity.Entity):   
+class Background(entity.Entity):   
 
     def __init__(self, name: str, position: tuple):
         window_size = pygame.display.get_window_size()
@@ -19,5 +19,5 @@ class background(entity.Entity):
         # Se o background sair completamente da tela, ele volta para a posição inicial, criando um loop infinito de background
         if self.rect.right <= 0:
             # Reseta a posição do background para o lado direito da tela
-            self.rect.left = pygame.display.get_window_size()[0]
+            self.rect.left = pygame.display.get_window_size()[0] - self.speed
     

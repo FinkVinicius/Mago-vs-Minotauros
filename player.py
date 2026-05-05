@@ -7,7 +7,6 @@ from playershot import PlayerShot
 class Player(Entity):
 
     def __init__(self, name: str, position: tuple, size: int):
-        # Define o tamanho do player como 20% da altura da janela
         self.player_size = size
         super().__init__(name, position, size=(size, size))
         self.name = name

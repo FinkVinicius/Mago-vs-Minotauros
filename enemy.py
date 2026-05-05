@@ -8,7 +8,6 @@ from entity import Entity
 class Enemy(Entity):
 
     def __init__(self, name: str, position: tuple, size: int):
-        # Define o tamanho do enemy como 20% da altura da janela
         self.enemy_size = size
         super().__init__(name, position, size=(size, size))
         self.name = name
@@ -62,7 +61,7 @@ class Enemy(Entity):
     def move(self):
         self.animation()
         if self.is_dead:
-            return # Se o inimigo estiver morto, ele não se move
+            return
         
         self.rect.centerx -= ENTITY_SPEED[self.name]
         
