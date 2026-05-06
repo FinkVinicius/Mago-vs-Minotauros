@@ -2,7 +2,7 @@
 
 import pygame
 
-from const import ALTURA_WIN, LARGURA_WIN
+from const import ALTURA_WIN, COR_MENU, LARGURA_WIN
 
 
 class Instrucoes:
@@ -29,6 +29,25 @@ class Instrucoes:
             if self.index_anim >= len(self.frames):
                 self.index_anim = 1
             self.menu_text(20, "Pressione ESC para voltar", (255, 255, 255), (220, 20))
+
+            centro_x, centro_y = self.window.get_width() // 2, self.window.get_height() // 2
+            rect_bege = pygame.Rect(0, 0, 400, 350)
+            rect_bege.center = (centro_x, centro_y)
+            pygame.draw.rect(self.window, (245, 245, 220), rect_bege)
+            pygame.draw.rect(self.window, (0, 0, 0), rect_bege, 3)
+
+            # Reorganize as alturas (Y) para não ficarem grudadas
+            self.menu_text(40, "CONTROLES", COR_MENU, (centro_x, centro_y - 120))
+
+            # Player 1
+            self.menu_text(32, "Player 1", COR_MENU, (centro_x, centro_y - 45))
+            self.menu_text(26, "Setas: Mover", COR_MENU, (centro_x, centro_y - 10))
+            self.menu_text(26, "Ctrl Dir: Atacar", COR_MENU, (centro_x, centro_y+20))
+
+            # Player 2
+            self.menu_text(32, "Player 2", COR_MENU, (centro_x, centro_y + 60))
+            self.menu_text(26, "WASD: Mover", COR_MENU, (centro_x, centro_y + 95))
+            self.menu_text(26, "Ctrl Esq: Atacar", COR_MENU, (centro_x, centro_y + 125))
             pygame.display.flip()
             
             #Eventos do menu

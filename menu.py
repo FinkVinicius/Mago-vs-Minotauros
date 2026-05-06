@@ -36,6 +36,8 @@ class Menu:
             self.window.blit(self.surface_menu, (LARGURA_WIN/2 - self.surface_menu.get_width()/2, ALTURA_WIN/6 - self.surface_menu.get_height()/2 ))
             
             #Chama o metodo para escrever o texto do menu e alinha ele no centro da tela, e coloca as opções do menu uma em baixo da outra
+            self.menu_text(20, "Setas para selecionar", (255, 255, 255), (180, 20))
+            self.menu_text(20, "Enter para confirmar", (255, 255, 255), (180, 60))
             for i in range(len(OPCOES_MENU)):    
                 if i == opcao_selecionada:
                     #Se a opção estiver selecionada, chama o metodo para escrever o texto do menu com a cor selecionada e um tamanho maior
