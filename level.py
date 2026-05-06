@@ -101,8 +101,9 @@ class Level:
                     # Chama o factory passando o nome da entidade
                     self.entity_list.extend(entityfactory.EntityFactory.get_entity(nome_inimigo))
             if not any(isinstance(ent, player.Player) for ent in self.entity_list):
+                pygame.mixer_music.stop()
                 save_screen = Score(self.window) 
-                save_screen.save()
+                save_screen.save(self.game_mode, self.scorep1, self.scorep2)
                 return
     # Função para desenhar texto na tela
     def level_text(self, text, color, pos, shadow=True):
