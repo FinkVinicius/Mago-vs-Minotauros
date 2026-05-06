@@ -69,10 +69,17 @@ class Menu:
                         return opcao_selecionada
 
     #metodo para escrever o texto do menu
-    def menu_text(self, text_size: int, text: str, color: tuple, pos: tuple):
+    def menu_text(self, text_size: int, text: str, color: tuple, pos: tuple,  shadow=True):
         font = pygame.font.Font('./Assets/fonte.ttf', text_size)
+
+        if shadow:
+            shadow_surface = font.render(text, True, (0, 0, 0))
+            shadow_rect = shadow_surface.get_rect(center=(pos[0] + 2, pos[1] + 2))
+            self.window.blit(shadow_surface, shadow_rect)
+
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect(center=pos)
         self.window.blit(text_surface, text_rect)
-   
+       
+       
 

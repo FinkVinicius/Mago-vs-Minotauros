@@ -9,7 +9,7 @@ LARGURA_WIN = 1268
 ALTURA_WIN = 720
 
 # opções do menu
-OPCOES_MENU = ('Single Player', 'Multiplayer', 'Instrucoes', 'Sair')
+OPCOES_MENU = ('Single Player', 'Multiplayer', 'Instrucoes','Score', 'Sair')
 
 
 #CONFIGURAÇÕES ENTIDADES
@@ -23,7 +23,7 @@ ENTITY_SPEED = {'player1':  5,
                 'inimigo2':  5,
                 'player1shot':  10,
                 'player2shot':  10}
-ENTITY_HEALTH = {'player1':  3, 
+ENTITY_HEALTH = {'player1':  1, 
                  'player2':  3,
                  'inimigo1':  3,
                  'inimigo2':  3}

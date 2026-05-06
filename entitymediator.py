@@ -49,6 +49,7 @@ class EntityMediator:
                             # mmata o inimigo se a vida baixar de 0
                             if inimigo.health <= 0: 
                                 inimigo.is_dead = True
+                                inimigo.last_damage = shot.name
                     # colisão inimigo e player            
                     elif (isinstance(test_entity, player.Player) and isinstance(ent, enemy.Enemy)) or(isinstance(test_entity, enemy.Enemy) and isinstance(ent, player.Player)):
                         p = test_entity if isinstance(test_entity, player.Player) else ent
@@ -67,3 +68,4 @@ class EntityMediator:
                                 # se a vida do player for menor que 0 mata ele
                                 if p.health <= 0:
                                     p.is_dead = True
+

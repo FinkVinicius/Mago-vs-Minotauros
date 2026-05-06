@@ -1,10 +1,11 @@
 import random
 import pygame
-from const import EVENT_SPAWN_ENEMY, SPAWN_POOL, TEMPO_SPAWN_ENEMY
+from const import EVENT_SPAWN_ENEMY, SPAWN_POOL, TEMPO_SPAWN_ENEMY, LARGURA_WIN, ALTURA_WIN
 import player
 import entity 
 import entityfactory
 import entitymediator
+from score import Score
 
 class Level:
     
@@ -23,6 +24,11 @@ class Level:
             self.entity_list.extend(entityfactory.EntityFactory.get_entity("player2"))
         #configura o tempo de spawn dos inimigos
         pygame.time.set_timer(EVENT_SPAWN_ENEMY, millis= TEMPO_SPAWN_ENEMY[self.name])
+        self.font = pygame.font.Font('./Assets/fonte.ttf', 20)
+        self.start_ticks = pygame.time.get_ticks()
+        self.scorep2 = 0
+        self.scorep1 = 0
+        
             
     def run(self):
         pygame.mixer_music.load(f'./Assets/{self.name}_music.mp3')
@@ -32,6 +38,14 @@ class Level:
 
         while True:
             # limita o jogo a rodar a 60 frames por segundo
+            for ent in self.entity_list:
+                if ent.health <= 0 and not ent.scored:
+                    if ent.last_damage == 'player1shot':
+                        self.scorep1 += 1
+                        ent.scored = True
+                    elif ent.last_damage == 'player2shot':
+                        self.scorep2 += 1
+                        ent.scored = True 
             clock.tick(60)
             # importa as funçoes de movimento
             [ent.move() for ent in self.entity_list]
@@ -46,17 +60,32 @@ class Level:
                     shot = ent.shoot()
                     if shot is not None:    
                         self.entity_list.append(shot)
-            # desenha o texto do nome do nível, instruções e informações de debug
-            self.level_text(text_size= 14, text= f"{self.name}", color= (255, 255, 255), pos= (100, 50))
-            self.level_text(text_size= 14, text= "Pressione ESC para voltar ao menu", color= (255, 255, 255), pos= (100, 80))
-            self.level_text(text_size= 14, text= f"Entidades na tela: {len(self.entity_list)}", color= (255, 255, 255), pos= (100, 110))
-            self.level_text(text_size= 14, text= f"fps: {clock.get_fps():.2f}", color= (255, 255, 255), pos= (100, 170))
-            # atualiza a tela depois de desenhar tudo
+
+            segundos_passados = (pygame.time.get_ticks() - self.start_ticks) // 1000
+            timer_text = f"TIME: {segundos_passados // 60:02d}:{segundos_passados % 60:02d}"
+            self.level_text(timer_text, (255, 255, 255), (20,20))
+
+            p1 = next((ent for ent in self.entity_list if ent.name == 'player1'), None)
+            p2 = next((ent for ent in self.entity_list if ent.name == 'player2'), None)
+            if p1:
+                txt_p1 = f"P1 HP: {max(0, p1.health)} | SCORE: {self.scorep1}"
+                self.level_text(txt_p1, (255, 255, 255), (20, 40))
+            else:
+                self.level_text(txt_p1, (255, 255, 255), (20, 40))
+            if self.game_mode == 1 and p2:
+                txt_p2 = f"P2 HP: {max(0, p2.health)} | SCORE: {self.scorep2}"
+                self.level_text(txt_p2, (255, 255, 255), (20, 60))
+
+            fps_text = f"FPS: {int(clock.get_fps())}"
+            self.level_text(fps_text, (0, 255, 0), (LARGURA_WIN - 100, ALTURA_WIN - 40))
+
+
             pygame.display.update()
             # Verifica colisões entre as entidades importando a função de colisão do EntityMediator
             entitymediator.EntityMediator.colision(entity_list= self.entity_list)
             # verifica a vida, e elimina se ja passaram pelo loop da animação de morte
             self.entity_list = [ent for ent in self.entity_list if ent.health > -900]
+            
             # botao de fechar a janela
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -71,10 +100,14 @@ class Level:
                     nome_inimigo = random.choice(SPAWN_POOL[self.name])
                     # Chama o factory passando o nome da entidade
                     self.entity_list.extend(entityfactory.EntityFactory.get_entity(nome_inimigo))
-
-    # Função para desenhar texto na tela, usada para mostrar o nome do nível, instruções e informações de debug
-    def level_text(self, text_size, text, color, pos):
-        font = pygame.font.SysFont('Arial', text_size)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect(center=pos)
-        self.window.blit(text_surface, text_rect)
+            if not any(isinstance(ent, player.Player) for ent in self.entity_list):
+                save_screen = Score(self.window) 
+                save_screen.save()
+                return
+    # Função para desenhar texto na tela
+    def level_text(self, text, color, pos, shadow=True):
+        if shadow:
+            shadow_surface = self.font.render(text, True, (0, 0, 0))
+            self.window.blit(shadow_surface, (pos[0] + 2, pos[1] + 2))
+        text_surface = self.font.render(text, True, color)
+        self.window.blit(text_surface, pos)

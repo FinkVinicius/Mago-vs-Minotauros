@@ -43,7 +43,7 @@ class Player(Entity):
                     self.framesmorte_index += 1
                     self.surf = self.framesmorte[self.framesmorte_index]
                 else:
-                    self.health = -999 
+                    self.health = -900 
         #animação de atirando
         elif self.is_shooting:
             self.animation_timer += 1

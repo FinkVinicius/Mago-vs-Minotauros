@@ -16,3 +16,7 @@ class Entity(ABC):
             self.health = ENTITY_HEALTH[self.name]
         else:
             self.health = 1
+        
+        #variavel ultimo dano
+        self.last_damage = None
+        self.scored = False

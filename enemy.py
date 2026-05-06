@@ -36,7 +36,7 @@ class Enemy(Entity):
                     self.framesmorte_index += 1
                     self.surf = self.framesmorte[self.framesmorte_index]
                 else:
-                    self.health = -999 
+                    self.health = -900
             #animação de batendo
             elif self.is_colliding:
                 if self.frames_colisao_index < len(self.frames_colisao) - 1:

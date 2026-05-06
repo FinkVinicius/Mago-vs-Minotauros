@@ -1,8 +1,10 @@
 
 import pygame
-from const import ALTURA_WIN, LARGURA_WIN, OPCOES_MENU
+from inst import Instrucoes
+from const import ALTURA_WIN, LARGURA_WIN
 from level import Level
 from menu import Menu
+from score import Score
 class Game:
     def __init__(self):
         pygame.init()
@@ -16,6 +18,8 @@ class Game:
             #mantem o jogo rodando a 60 frames por segundo
             self.clock.tick(60)
             #roda o menu e pega a opção escolhida
+            score = Score(self.window)
+            instrucoes = Instrucoes (self.window)
             menu = Menu(self.window)
             opcao = menu.run()
             #roda o nível correspondente a opção escolhida
@@ -25,8 +29,12 @@ class Game:
             elif opcao == 1:
                 level = Level(self.window, 'lvl1', opcao)
                 level_return = level.run()    
-            elif opcao == 2: 
+            elif opcao == 2:
+                instrucoes = instrucoes.run()
                 pass 
             elif opcao == 3: 
+                score.run()
+                pass 
+            elif opcao == 4: 
                 pygame.quit()
                 quit()
