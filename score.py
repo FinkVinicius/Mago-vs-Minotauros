@@ -15,10 +15,10 @@ class Score:
         self.index_anim = 0
        
     def run(self, ):
-        #Chama a musica e toca ela em loop
+        
         pygame.mixer_music.load('./Assets/menu.mp3')
         pygame.mixer_music.play(-1) 
-        opcao_selecionada = 0
+        
         clock = pygame.time.Clock()
         meu_banco = DBProxy('highscores.db')
         top_10 = meu_banco.consulta()
@@ -26,7 +26,7 @@ class Score:
 
         while True:
             clock.tick(60)
-            # Roda a animação do menu
+            
             frame_atual = self.frames[int(self.index_anim)]
             self.window.blit(frame_atual, (0, 0))
             self.index_anim += 0.1 
@@ -35,7 +35,7 @@ class Score:
             self.menu_text(20, "Pressione ESC para voltar", (255, 255, 255), (220, 20))
 
             centro_x, centro_y = self.window.get_width() // 2, self.window.get_height() // 2
-            rect_bege = pygame.Rect(0, 0, 300, 320)
+            rect_bege = pygame.Rect(0, 0, 310, 320)
             rect_bege.center = (centro_x, centro_y)
             pygame.draw.rect(self.window, (245, 245, 220), rect_bege)
             pygame.draw.rect(self.window, (0, 0, 0), rect_bege, 3)
@@ -51,9 +51,9 @@ class Score:
 
             pygame.display.flip()
             
-            #Eventos do menu
+           
             for event in pygame.event.get():
-                #fecha o jogo se o jogador clicar no X da janela
+               
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
@@ -70,7 +70,7 @@ class Score:
         meu_banco = DBProxy('highscores.db')
         player1 = ""
         player2 = ""
-        focando_p1 = True  # Começamos sempre pelo primeiro
+        focando_p1 = True
         
         while True:
             clock.tick(60)
@@ -81,20 +81,20 @@ class Score:
             self.index_anim = (self.index_anim + 0.1) % len(self.frames)
 
             centro_x, centro_y = self.window.get_width() // 2, self.window.get_height() // 2
-            rect_bege = pygame.Rect(0, 0, 300, 400)
+            rect_bege = pygame.Rect(0, 0, 430, 200)
             rect_bege.center = (centro_x, centro_y)
             pygame.draw.rect(self.window, (245, 245, 220), rect_bege)
             pygame.draw.rect(self.window, (0, 0, 0), rect_bege, 3)
 
             # 3. Textos na Tela
-            self.menu_text(30, "Registre seu score", COR_MENU, (centro_x, centro_y - 100))
+            self.menu_text(30, "Registre seu score", COR_MENU, (centro_x, centro_y - 70))
 
             if focando_p1:
                 self.menu_text(25, "Nome do Player 1:", (COR_MENU), (centro_x, centro_y - 30))
                 self.menu_text(30, player1 + "|", (COR_MENU), (centro_x, centro_y + 20))
             else:
-                # Só chega aqui se game_mode permitir multiplayer
-                self.menu_text(25, "Nome do Player 2:", (COR_MENU), (centro_x, centro_y - 10))
+                
+                self.menu_text(25, "Nome do Player 2:", (COR_MENU), (centro_x, centro_y - 30))
                 self.menu_text(30, player2 + "|", (COR_MENU), (centro_x, centro_y + 20))
 
             pygame.display.flip()

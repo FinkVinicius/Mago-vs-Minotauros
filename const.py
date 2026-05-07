@@ -2,7 +2,7 @@ import pygame
 
 #cores
 COR_MENU = (218, 165, 32)
-COR_SELECTED = (255, 255, 255)
+COR_SELECTED = (94, 33, 22)
 
 #tamanho da janela
 LARGURA_WIN = 1268
@@ -23,10 +23,10 @@ ENTITY_SPEED = {'player1':  5,
                 'inimigo2':  5,
                 'player1shot':  10,
                 'player2shot':  10}
-ENTITY_HEALTH = {'player1':  1, 
+ENTITY_HEALTH = {'player1':  3, 
                  'player2':  3,
                  'inimigo1':  3,
-                 'inimigo2':  3}
+                 'inimigo2':  5}
 TAMANHOS =  {'player1':  (0.1, 0.2), 
                'player2':  (0.1, 0.2),
                'inimigo1':  (0.20, 0.30), 
@@ -52,8 +52,8 @@ PLAYER_KEY_SHOOT = {'player1': pygame.K_RCTRL,
 
 #configurações dos inimigos
 EVENT_SPAWN_ENEMY = pygame.USEREVENT + 1
-TEMPO_SPAWN_ENEMY = {'lvl1':  5000, 
-                     'lvl2':  1000}
+TEMPO_SPAWN_ENEMY = {'lvl1':  2000, 
+                     'lvl2':  500}
 SPAWN_POOL = {'lvl1': ['inimigo1'],
               'lvl2': ['inimigo1', 'inimigo2']}
 

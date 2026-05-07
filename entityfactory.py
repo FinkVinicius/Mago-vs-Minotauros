@@ -52,7 +52,13 @@ class EntityFactory:
                     list_bg.append(Background(f"lvl1bg{i}", position=(0, 0)))
                     list_bg.append(Background(f"lvl1bg{i}", position=(LARGURA_WIN, 0)))
                 return list_bg
-            
+            case 'lvl2':
+                # Carrega as frames de animação do background, e posiciona elas lado a lado tmb adiciona o lvl1bj no nome da entity
+                list_bg = []
+                for i in range(1, 8):
+                    list_bg.append(Background(f"lvl2bg{i}", position=(0, 0)))
+                    list_bg.append(Background(f"lvl2bg{i}", position=(LARGURA_WIN, 0)))
+                return list_bg
             case 'player1' | 'player2':
                 tamanho = LARGURA_WIN*TAMANHOS.get(entity_name)[0], ALTURA_WIN*TAMANHOS.get(entity_name)[1]
                 assets = EntityFactory._load_assets(entity_name, tamanho)

@@ -38,12 +38,18 @@ class Menu:
             #Chama o metodo para escrever o texto do menu e alinha ele no centro da tela, e coloca as opções do menu uma em baixo da outra
             self.menu_text(20, "Setas para selecionar", (255, 255, 255), (180, 20))
             self.menu_text(20, "Enter para confirmar", (255, 255, 255), (180, 60))
+            centro_x, centro_y = self.window.get_width() // 2, self.window.get_height() // 2
+            
+            rect_bege = pygame.Rect(0, 0, 400, 240)
+            rect_bege.center = (centro_x, centro_y+170)
+            pygame.draw.rect(self.window, (245, 245, 220), rect_bege)
+            pygame.draw.rect(self.window, (0, 0, 0), rect_bege, 3)
             for i in range(len(OPCOES_MENU)):    
                 if i == opcao_selecionada:
                     #Se a opção estiver selecionada, chama o metodo para escrever o texto do menu com a cor selecionada e um tamanho maior
-                    self.menu_text(text_size= 35, text= OPCOES_MENU[i], color= COR_SELECTED, pos= (LARGURA_WIN/2, ALTURA_WIN/2 + 120 + i * 40))
+                    self.menu_text(text_size= 35, text= OPCOES_MENU[i], color= COR_SELECTED, pos= (LARGURA_WIN/2, ALTURA_WIN/2 + 90 + i * 40))
                 else:
-                    self.menu_text(text_size= 30, text= OPCOES_MENU[i], color= COR_MENU, pos= (LARGURA_WIN/2, ALTURA_WIN/2 + 120 + i * 40))     
+                    self.menu_text(text_size= 30, text= OPCOES_MENU[i], color= COR_MENU, pos= (LARGURA_WIN/2, ALTURA_WIN/2 + 90 + i * 40))     
             
             #atualiza a tela
             pygame.display.flip()

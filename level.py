@@ -5,11 +5,10 @@ import player
 import entity 
 import entityfactory
 import entitymediator
-from score import Score
 
 class Level:
     
-    def __init__(self, window, name, opcao):
+    def __init__(self, window, name, opcao, score_p1=0, score_p2=0):
         # pega as informações que vem do menu
         self.window = window
         self.name = name
@@ -26,8 +25,8 @@ class Level:
         pygame.time.set_timer(EVENT_SPAWN_ENEMY, millis= TEMPO_SPAWN_ENEMY[self.name])
         self.font = pygame.font.Font('./Assets/fonte.ttf', 20)
         self.start_ticks = pygame.time.get_ticks()
-        self.scorep2 = 0
-        self.scorep1 = 0
+        self.scorep1 = score_p1
+        self.scorep2 = score_p2
         
             
     def run(self):
@@ -100,12 +99,18 @@ class Level:
                     nome_inimigo = random.choice(SPAWN_POOL[self.name])
                     # Chama o factory passando o nome da entidade
                     self.entity_list.extend(entityfactory.EntityFactory.get_entity(nome_inimigo))
+           
+
+            segundos_passadosfase = (pygame.time.get_ticks() - self.start_ticks) // 1000
+
+            if segundos_passadosfase >= 30:
+                pygame.mixer_music.stop()
+                return {"status": "NEXT_LEVEL", "p1": self.scorep1, "p2": self.scorep2}
+
             if not any(isinstance(ent, player.Player) for ent in self.entity_list):
                 pygame.mixer_music.stop()
-                save_screen = Score(self.window) 
-                save_screen.save(self.game_mode, self.scorep1, self.scorep2)
-                return
-    # Função para desenhar texto na tela
+                return {"status": "GAME_OVER"}
+   
     def level_text(self, text, color, pos, shadow=True):
         if shadow:
             shadow_surface = self.font.render(text, True, (0, 0, 0))
