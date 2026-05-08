@@ -23,15 +23,15 @@ ENTITY_SPEED = {'player1':  5,
                 'inimigo2':  5,
                 'player1shot':  10,
                 'player2shot':  10}
-ENTITY_HEALTH = {'player1':  3, 
-                 'player2':  3,
+ENTITY_HEALTH = {'player1':  4, 
+                 'player2':  4,
                  'inimigo1':  3,
-                 'inimigo2':  5}
+                 'inimigo2':  4}
 TAMANHOS =  {'player1':  (0.1, 0.2), 
                'player2':  (0.1, 0.2),
-               'inimigo1':  (0.20, 0.30), 
+               'inimigo1':  (0.20, 0.3), 
                'inimigo2':  (0.15, 0.3),
-               'player1shot':  (0.05, 0.04),
+               'player1shot':  (0.10, 0.04),
                'player2shot':  (0.10, 0.04),
                 }
 

@@ -50,7 +50,7 @@ class Game:
                         save_screen.save(opcao, res2["p1"], res2["p2"])
                         pass
                     
-                    elif res2["status"] == "VOCE MORREU":
+                    elif res2["status"] == "GAME_OVER":
                         self.show_transition_screen("VOCE MORREU")
                         pygame.mixer_music.stop()
                         pass
